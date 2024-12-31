@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy New Year</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #D19C97, #6495ED); /* Rose Tan to Cornflower Blue */
+      color: #61dafb;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .happy-new-year {
+      font-size: 3em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #FFE5B4; /* Golden yellow */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+
+    img {
+      width: 400px; /* Increase the width for a larger GIF */
+      height: auto; /* Maintain aspect ratio */
+    }
+
+    audio {
+      display: none; /* Hide audio controls */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="happy-new-year">Happy New Year!</div>
+    <img src="ebriwan-manny.gif" alt="Fireworks">
+    <audio id="new-year-audio" autoplay loop>
+      <source src="Manny-Pacquiao.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <p id="audio-message" style="color: #fff; font-size: 1em; margin-top: 20px;"></p>
+  </div>
+
+  <script>
+    // Ensure autoplay works even with browser restrictions
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('new-year-audio');
+      const message = document.getElementById('audio-message');
+      
+      audio.play().then(() => {
+        console.log('Audio is playing successfully.');
+      }).catch(error => {
+        console.error('Autoplay failed:', error);
+        message.textContent = "Click anywhere.";
+        
+        // Add a click listener to start playback after interaction
+        document.body.addEventListener('click', () => {
+          audio.play().then(() => {
+            message.textContent = ""; // Clear the message once audio starts
+          }).catch(err => {
+            console.error('Error starting audio playback:', err);
+          });
+        }, { once: true });
+      });
+    });
+  </script>
+</body>
+</html>
